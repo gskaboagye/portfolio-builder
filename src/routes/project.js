@@ -83,7 +83,7 @@ router.get("/:projectName", getProjectByName);
 * /project:
 * post:
 * ```
-  summary: Create a project
+  summary: Create a new project
   ```
 * ```
   responses:
@@ -92,7 +92,7 @@ router.get("/:projectName", getProjectByName);
     201:
   ```
 * ```
-      description: Project created
+      description: Project created successfully
   ```
 * ```
     400:
@@ -116,7 +116,7 @@ router.post("/", isAuthenticated, createProject);
 * /project/{projectName}:
 * put:
 * ```
-  summary: Update a project
+  summary: Update an existing project
   ```
 * ```
   parameters:
@@ -143,7 +143,7 @@ router.post("/", isAuthenticated, createProject);
     200:
   ```
 * ```
-      description: Project updated
+      description: Project updated successfully
   ```
 * ```
     404:
@@ -198,7 +198,7 @@ updateProject
     200:
   ```
 * ```
-      description: Project deleted
+      description: Project deleted successfully
   ```
 * ```
     404:

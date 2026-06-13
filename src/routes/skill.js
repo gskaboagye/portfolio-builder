@@ -83,7 +83,7 @@ router.get("/:skillName", getSkillByName);
 * /skill:
 * post:
 * ```
-  summary: Create a skill
+  summary: Create a new skill
   ```
 * ```
   responses:
@@ -92,7 +92,7 @@ router.get("/:skillName", getSkillByName);
     201:
   ```
 * ```
-      description: Skill created
+      description: Skill created successfully
   ```
 * ```
     400:
@@ -116,7 +116,7 @@ router.post("/", isAuthenticated, createSkill);
 * /skill/{skillName}:
 * put:
 * ```
-  summary: Update a skill
+  summary: Update an existing skill
   ```
 * ```
   parameters:
@@ -143,7 +143,7 @@ router.post("/", isAuthenticated, createSkill);
     200:
   ```
 * ```
-      description: Skill updated
+      description: Skill updated successfully
   ```
 * ```
     404:
@@ -198,7 +198,7 @@ updateSkill
     200:
   ```
 * ```
-      description: Skill deleted
+      description: Skill deleted successfully
   ```
 * ```
     404:
