@@ -86,51 +86,6 @@ router.get("/:projectName", getProjectByName);
   summary: Create a project
   ```
 * ```
-  requestBody:
-  ```
-* ```
-    required: true
-  ```
-* ```
-    content:
-  ```
-* ```
-      application/json:
-  ```
-* ```
-        schema:
-  ```
-* ```
-          type: object
-  ```
-* ```
-          properties:
-  ```
-* ```
-            projectName:
-  ```
-* ```
-              type: string
-  ```
-* ```
-            description:
-  ```
-* ```
-              type: string
-  ```
-* ```
-            technology:
-  ```
-* ```
-              type: string
-  ```
-* ```
-            githubUrl:
-  ```
-* ```
-              type: string
-  ```
-* ```
   responses:
   ```
 * ```
@@ -140,6 +95,12 @@ router.get("/:projectName", getProjectByName);
       description: Project created
   ```
 * ```
+    400:
+  ```
+* ```
+      description: Invalid input
+  ```
+* ```
     401:
   ```
 * ```
@@ -147,11 +108,7 @@ router.get("/:projectName", getProjectByName);
   ```
 
 */
-router.post(
-"/",
-isAuthenticated,
-createProject
-);
+router.post("/", isAuthenticated, createProject);
 
 /**
 
@@ -187,6 +144,12 @@ createProject
   ```
 * ```
       description: Project updated
+  ```
+* ```
+    404:
+  ```
+* ```
+      description: Project not found
   ```
 * ```
     401:
@@ -236,6 +199,12 @@ updateProject
   ```
 * ```
       description: Project deleted
+  ```
+* ```
+    404:
+  ```
+* ```
+      description: Project not found
   ```
 
 */

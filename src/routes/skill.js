@@ -86,39 +86,6 @@ router.get("/:skillName", getSkillByName);
   summary: Create a skill
   ```
 * ```
-  requestBody:
-  ```
-* ```
-    required: true
-  ```
-* ```
-    content:
-  ```
-* ```
-      application/json:
-  ```
-* ```
-        schema:
-  ```
-* ```
-          type: object
-  ```
-* ```
-          properties:
-  ```
-* ```
-            skillName:
-  ```
-* ```
-              type: string
-  ```
-* ```
-            level:
-  ```
-* ```
-              type: string
-  ```
-* ```
   responses:
   ```
 * ```
@@ -128,6 +95,12 @@ router.get("/:skillName", getSkillByName);
       description: Skill created
   ```
 * ```
+    400:
+  ```
+* ```
+      description: Invalid input
+  ```
+* ```
     401:
   ```
 * ```
@@ -135,11 +108,7 @@ router.get("/:skillName", getSkillByName);
   ```
 
 */
-router.post(
-"/",
-isAuthenticated,
-createSkill
-);
+router.post("/", isAuthenticated, createSkill);
 
 /**
 
@@ -175,6 +144,12 @@ createSkill
   ```
 * ```
       description: Skill updated
+  ```
+* ```
+    404:
+  ```
+* ```
+      description: Skill not found
   ```
 * ```
     401:
@@ -224,6 +199,12 @@ updateSkill
   ```
 * ```
       description: Skill deleted
+  ```
+* ```
+    404:
+  ```
+* ```
+      description: Skill not found
   ```
 
 */
