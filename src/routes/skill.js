@@ -20,7 +20,10 @@ deleteSkill,
   summary: Get all skills
   ```
 * ```
-  tags: [Skills]
+  tags:
+  ```
+* ```
+    - Skills
   ```
 * ```
   responses:
@@ -29,7 +32,7 @@ deleteSkill,
     200:
   ```
 * ```
-      description: Success
+      description: Successfully retrieved all skills
   ```
 
 */
@@ -44,7 +47,10 @@ router.get("/", getSkills);
   summary: Get skill by name
   ```
 * ```
-  tags: [Skills]
+  tags:
+  ```
+* ```
+    - Skills
   ```
 * ```
   parameters:
@@ -92,7 +98,10 @@ router.get("/:skillName", getSkillByName);
   summary: Create a new skill
   ```
 * ```
-  tags: [Skills]
+  tags:
+  ```
+* ```
+    - Skills
   ```
 * ```
   responses:
@@ -128,7 +137,10 @@ router.post("/", isAuthenticated, createSkill);
   summary: Update an existing skill
   ```
 * ```
-  tags: [Skills]
+  tags:
+  ```
+* ```
+    - Skills
   ```
 * ```
   parameters:
@@ -186,7 +198,10 @@ updateSkill
   summary: Delete a skill
   ```
 * ```
-  tags: [Skills]
+  tags:
+  ```
+* ```
+    - Skills
   ```
 * ```
   parameters:

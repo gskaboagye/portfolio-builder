@@ -20,13 +20,19 @@ deleteProject,
   summary: Get all projects
   ```
 * ```
+  tags:
+  ```
+* ```
+    - Projects
+  ```
+* ```
   responses:
   ```
 * ```
     200:
   ```
 * ```
-      description: Success
+      description: Successfully retrieved all projects
   ```
 
 */
@@ -38,7 +44,13 @@ router.get("/", getProjects);
 * /project/{projectName}:
 * get:
 * ```
-  summary: Get project by name
+  summary: Get a project by name
+  ```
+* ```
+  tags:
+  ```
+* ```
+    - Projects
   ```
 * ```
   parameters:
@@ -86,6 +98,12 @@ router.get("/:projectName", getProjectByName);
   summary: Create a new project
   ```
 * ```
+  tags:
+  ```
+* ```
+    - Projects
+  ```
+* ```
   responses:
   ```
 * ```
@@ -117,6 +135,12 @@ router.post("/", isAuthenticated, createProject);
 * put:
 * ```
   summary: Update an existing project
+  ```
+* ```
+  tags:
+  ```
+* ```
+    - Projects
   ```
 * ```
   parameters:
@@ -172,6 +196,12 @@ updateProject
 * delete:
 * ```
   summary: Delete a project
+  ```
+* ```
+  tags:
+  ```
+* ```
+    - Projects
   ```
 * ```
   parameters:
