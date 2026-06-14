@@ -134,7 +134,7 @@ router.post("/", isAuthenticated, createSkill);
 * /skill/{skillName}:
 * put:
 * ```
-  summary: Update an existing skill
+  summary: Update a skill
   ```
 * ```
   tags:

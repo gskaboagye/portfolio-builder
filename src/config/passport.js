@@ -1,243 +1,45 @@
-const express = require("express");
-const router = express.Router();
+const passport = require("passport");
+const GitHubStrategy = require("passport-github2").Strategy;
 
-const isAuthenticated = require("../middleware/authenticate");
-
-const {
-getSkills,
-getSkillByName,
-createSkill,
-updateSkill,
-deleteSkill,
-} = require("../controllers/skillController");
-
-/**
-
-* @swagger
-* /skill:
-* get:
-* ```
-  summary: Get all skills
-  ```
-* ```
-  tags:
-  ```
-* ```
-    - Skills
-  ```
-* ```
-  responses:
-  ```
-* ```
-    200:
-  ```
-* ```
-      description: Successfully retrieved all skills
-  ```
-
-*/
-router.get("/", getSkills);
-
-/**
-
-* @swagger
-* /skill/{skillName}:
-* get:
-* ```
-  summary: Get skill by name
-  ```
-* ```
-  tags:
-  ```
-* ```
-    - Skills
-  ```
-* ```
-  parameters:
-  ```
-* ```
-    - in: path
-  ```
-* ```
-      name: skillName
-  ```
-* ```
-      required: true
-  ```
-* ```
-      schema:
-  ```
-* ```
-        type: string
-  ```
-* ```
-  responses:
-  ```
-* ```
-    200:
-  ```
-* ```
-      description: Skill found
-  ```
-* ```
-    404:
-  ```
-* ```
-      description: Skill not found
-  ```
-
-*/
-router.get("/:skillName", getSkillByName);
-
-/**
-
-* @swagger
-* /skill:
-* post:
-* ```
-  summary: Create a new skill
-  ```
-* ```
-  tags:
-  ```
-* ```
-    - Skills
-  ```
-* ```
-  responses:
-  ```
-* ```
-    201:
-  ```
-* ```
-      description: Skill created successfully
-  ```
-* ```
-    400:
-  ```
-* ```
-      description: Invalid input
-  ```
-* ```
-    401:
-  ```
-* ```
-      description: Authentication required
-  ```
-
-*/
-router.post("/", isAuthenticated, createSkill);
-
-/**
-
-* @swagger
-* /skill/{skillName}:
-* put:
-* ```
-  summary: Update a skill
-  ```
-* ```
-  tags:
-  ```
-* ```
-    - Skills
-  ```
-* ```
-  parameters:
-  ```
-* ```
-    - in: path
-  ```
-* ```
-      name: skillName
-  ```
-* ```
-      required: true
-  ```
-* ```
-      schema:
-  ```
-* ```
-        type: string
-  ```
-* ```
-  responses:
-  ```
-* ```
-    200:
-  ```
-* ```
-      description: Skill updated successfully
-  ```
-* ```
-    404:
-  ```
-* ```
-      description: Skill not found
-  ```
-* ```
-    401:
-  ```
-* ```
-      description: Authentication required
-  ```
-
-*/
-router.put(
-"/:skillName",
-isAuthenticated,
-updateSkill
+// Configure GitHub OAuth only if credentials exist
+if (
+process.env.GITHUB_CLIENT_ID &&
+process.env.GITHUB_CLIENT_SECRET &&
+process.env.CALLBACK_URL
+) {
+passport.use(
+new GitHubStrategy(
+{
+clientID: process.env.GITHUB_CLIENT_ID,
+clientSecret: process.env.GITHUB_CLIENT_SECRET,
+callbackURL: process.env.CALLBACK_URL,
+},
+async (
+accessToken,
+refreshToken,
+profile,
+done
+) => {
+try {
+return done(null, profile);
+} catch (error) {
+return done(error, null);
+}
+}
+)
 );
+} else {
+console.warn(
+"GitHub OAuth credentials not configured."
+);
+}
 
-/**
+passport.serializeUser((user, done) => {
+done(null, user);
+});
 
-* @swagger
-* /skill/{skillName}:
-* delete:
-* ```
-  summary: Delete a skill
-  ```
-* ```
-  tags:
-  ```
-* ```
-    - Skills
-  ```
-* ```
-  parameters:
-  ```
-* ```
-    - in: path
-  ```
-* ```
-      name: skillName
-  ```
-* ```
-      required: true
-  ```
-* ```
-      schema:
-  ```
-* ```
-        type: string
-  ```
-* ```
-  responses:
-  ```
-* ```
-    200:
-  ```
-* ```
-      description: Skill deleted successfully
-  ```
-* ```
-    404:
-  ```
-* ```
-      description: Skill not found
-  ```
+passport.deserializeUser((user, done) => {
+done(null, user);
+});
 
-*/
-router.delete("/:skillName", deleteSkill);
-
-module.exports = router;
+module.exports = passport;
