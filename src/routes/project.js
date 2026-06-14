@@ -13,9 +13,17 @@ const {
 
 /**
  * @swagger
+ * tags:
+ *   name: Projects
+ *   description: Project management endpoints
+ */
+
+/**
+ * @swagger
  * /project:
  *   get:
  *     summary: Get all projects
+ *     tags: [Projects]
  *     responses:
  *       200:
  *         description: Success
@@ -27,6 +35,7 @@ router.get("/", getProjects);
  * /project/{projectName}:
  *   get:
  *     summary: Get project by name
+ *     tags: [Projects]
  *     parameters:
  *       - in: path
  *         name: projectName
@@ -46,6 +55,22 @@ router.get("/:projectName", getProjectByName);
  * /project:
  *   post:
  *     summary: Create a new project
+ *     tags: [Projects]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               projectName:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               technology:
+ *                 type: string
+ *               githubUrl:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Project created
@@ -61,19 +86,24 @@ router.post("/", isAuthenticated, createProject);
  * /project/{projectName}:
  *   put:
  *     summary: Update a project
+ *     tags: [Projects]
  *     parameters:
  *       - in: path
  *         name: projectName
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
  *     responses:
  *       200:
  *         description: Project updated
  *       404:
  *         description: Project not found
- *       401:
- *         description: Authentication required
  */
 router.put("/:projectName", isAuthenticated, updateProject);
 
@@ -82,6 +112,7 @@ router.put("/:projectName", isAuthenticated, updateProject);
  * /project/{projectName}:
  *   delete:
  *     summary: Delete a project
+ *     tags: [Projects]
  *     parameters:
  *       - in: path
  *         name: projectName
