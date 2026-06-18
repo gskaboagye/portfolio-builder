@@ -7,6 +7,9 @@ const userSchema = Joi.object({
   lastName: Joi.string().required(),
   email: Joi.string().email().required(),
   phone: Joi.string().required(),
+  role: Joi.string().required(),
+  location: Joi.string().required(),
+  portfolioUrl: Joi.string().required(),
 });
 
 const getUsers = async (req, res) => {
